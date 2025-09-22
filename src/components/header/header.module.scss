@@ -1,0 +1,46 @@
+.header{
+    display: flex;
+    background: #f4f4f4;
+    border-bottom: 1px solid #ddd;
+    flex-direction: column;
+    height: 64px;
+    position: relative;
+    
+    img{
+        position: absolute;
+        height: 64px;
+        left: 16px; // 왼쪽 여백
+        transform: translate(-20%);
+    }
+
+    .searchForm{
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, +40%);
+        background-color: white;
+        padding: 5px;
+        border-radius: 0.5rem;
+
+        .search{
+            width: 400px;
+            height: 30px;
+            border-radius: 0.25rem;
+            :focus{
+                outline: none;
+                box-shadow: none;
+            }
+        }
+        .searchBtn{
+            height: 30px;
+            width: 30px;
+            // background-color: grayscale($color: #d1d5db);
+            border-radius: 0.25rem;
+        }
+
+    }
+}
+
+.search:focus{
+    outline: none;
+    box-shadow: none;
+}

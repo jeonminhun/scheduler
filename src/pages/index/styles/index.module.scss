@@ -1,0 +1,9 @@
+
+.calendarWrapper {
+  width: 50%;
+  height: calc(100vh - 100px); // 헤더나 검색창 높이 뺀 만큼
+  position: absolute;
+  transform: translate(+10%);
+  }
+
+
