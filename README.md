@@ -15,7 +15,6 @@
 - **프로젝트명**: Scheduler  
 - **기간**: 2025.08 ~ 2025.09  
 - **유형**: 개인 프로젝트  
-- **GitHub**: [https://github.com/jeonminhun/scheduler](https://github.com/jeonminhun/scheduler)
 
 ### 🧭 프로젝트 배경
 
