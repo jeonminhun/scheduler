@@ -1,69 +1,85 @@
-# React + TypeScript + Vite
+# 🗓️ Scheduler - 일정 관리 캘린더 앱
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> React + TypeScript 기반의 직관적이고 가벼운 개인용 스케줄러  
+> 모달, 검색, 필터 기능을 통해 쉽고 빠르게 일정을 관리할 수 있습니다.
 
-Currently, two official plugins are available:
+![React](https://img.shields.io/badge/React-20232A?logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06B6D4?logo=tailwindcss)
+![Day.js](https://img.shields.io/badge/Day.js-FE7A16?logo=javascript)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 📆 프로젝트 개요
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **프로젝트명**: Scheduler  
+- **기간**: 2025.08 ~ 2025.09  
+- **유형**: 개인 프로젝트  
+- **GitHub**: [https://github.com/jeonminhun/scheduler](https://github.com/jeonminhun/scheduler)
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 🧭 프로젝트 배경
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+“직접 사용할 수 있는 간단하고 직관적인 달력 앱”을 목표로 시작한 사이드 프로젝트입니다.  
+복잡한 일정 관리 도구 대신, **직관적인 UI와 키보드 단축키**로 빠르게 일정을 추가하고 수정할 수 있도록 설계했습니다.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## ⚙️ 기술 스택
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+| 구분 | 기술 |
+|------|------|
+| **Frontend** | React, TypeScript |
+| **UI/Style** | TailwindCSS, CSS Flex/Grid |
+| **날짜 라이브러리** | Day.js |
+| **빌드 도구** | Vite (예정 시 명시) |
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+## 🌟 주요 기능
+
+### 📅 달력 UI
+- 월별 / 주별 / 일별 보기 지원  
+- 날짜 클릭 시 **이벤트 추가 모달** 표시  
+- 반응형 레이아웃 적용 (모바일/태블릿/PC 대응)
+
+### 🗂️ 일정 CRUD
+- 일정 **추가 / 수정 / 삭제 / 검색** 기능 제공  
+- 일정 클릭 시 수정 모달 표시, 실시간 반영
+
+### 💬 UX 세부 기능
+- **ESC 키**로 모달 닫기, **Enter 키**로 일정 저장  
+- 이벤트 수정 시 다중 `onClick` 실행 (삭제/저장 동시에 처리)  
+- 날짜 및 시간 입력 시 **숫자·한국어 형식 모두 지원**  
+- Day.js locale 설정을 통한 **한국어 및 숫자 달력 표기**
+
+---
+
+## 🧩 트러블슈팅
+
+### 1. 달력 언어 표기 문제
+- **문제**: 기본 캘린더의 월/요일이 영어로 표시  
+- **해결**: Day.js `locale('ko')` 설정 및 숫자 표기 커스터마이징  
+- **결과**: 한국어 및 숫자 기반 달력 표기 정상 작동
+
+---
+
+### 2. ESC 키 모달 닫기 버그
+- **문제**: 특정 상황에서 ESC 키 입력이 작동하지 않음  
+- **원인**: keydown 이벤트 리스너 미삭제로 인한 중복 등록  
+- **해결**: `useEffect`로 이벤트 등록/해제 관리  
+- **결과**: 안정적인 ESC 모달 닫기 기능 구현
+
+---
+
+### 3. Flex 레이아웃 높이 불일치
+- **문제**: 헤더 영역과 버튼의 높이가 일치하지 않음  
+- **해결**: `items-center`, `gap`, `align-items: stretch` 속성 조정  
+- **결과**: UI 정렬 문제 해결 및 시각적 안정성 확보
+
+---
+
+### 4. onClick 함수 다중 실행
+- **문제**: 일정 삭제 후 모달을 닫는 두 동작을 동시에 처리 필요  
+- **해결**: 람다식으로 다중 호출 처리  
+  ```tsx
+  onClick={() => { deleteEvent(id); onClose(); }}
